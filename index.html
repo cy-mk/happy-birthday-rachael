@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Website</title>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family: Georgia, serif;
+    background:#fff7f2;
+    overflow:hidden;
+}
+
+.section{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transition:opacity 1.2s ease;
+}
+
+.hidden{
+    opacity:0;
+    pointer-events:none;
+}
+
+.fadeout{
+    opacity:0;
+}
+
+/* SCENE 1 */
+#scene1{
+    flex-direction:column;
+    gap:20px;
+    background:linear-gradient(to bottom,#fff6ee,#ffdede);
+}
+
+h1{
+    font-size:4rem;
+    color:#5d3d3d;
+}
+
+.cake{
+    position:relative;
+    width:240px;
+    height:200px;
+    margin-top:20px;
+}
+
+.cake-body{
+    position:absolute;
+    bottom:0;
+    width:240px;
+    height:130px;
+    background:#ffc6d0;
+    border-radius:20px;
+}
+
+.candle{
+    position:absolute;
+    left:110px;
+    top:30px;
+    width:20px;
+    height:80px;
+    background:white;
+}
+
+.flame{
+    position:absolute;
+    left:-4px;
+    top:-32px;
+    width:28px;
+    height:38px;
+    background:orange;
+    border-radius:50%;
+    box-shadow:0 0 30px orange;
+    animation:flicker .2s infinite alternate;
+}
+
+@keyframes flicker{
+from{transform:scale(1)}
+to{transform:scale(1.08)}
+}
+
+button{
+    padding:14px 26px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    background:white;
+}
+
+/* SCENE 2 */
+#scene2{
+    background:#fffaf7;
+    gap:50px;
+    padding:40px;
+}
+
+.card-container{
+    perspective:2000px;
+}
+
+.birthday-card{
+    width:700px;
+    height:450px;
+    position:relative;
+    transform-style:preserve-3d;
+    transition:1.2s;
+    cursor:pointer;
+}
+
+.birthday-card.open{
+    transform:rotateY(180deg);
+}
+
+.card-front,
+.card-inside{
+    position:absolute;
+    width:100%;
+    height:100%;
+    border-radius:20px;
+    background:white;
+    box-shadow:0 10px 40px rgba(0,0,0,.15);
+    backface-visibility:hidden;
+}
+
+.card-front{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+}
+
+.card-inside{
+    transform:rotateY(180deg);
+    display:flex;
+}
+
+.photo-side{
+    width:40%;
+    position:relative;
+    overflow:hidden;
+    border-radius:20px 0 0 20px;
+}
+
+.message-side{
+    width:60%;
+    padding:40px;
+    overflow:auto;
+}
+
+.photo-panel{
+    width:340px;
+    height:500px;
+    position:relative;
+}
+
+.slide{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:20px;
+    opacity:0;
+    transition:opacity 1.5s ease;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+.slide.active{
+    opacity:1;
+}
+
+.continue-btn{
+    margin-top:20px;
+}
+
+/* SCENE 3 */
+#scene3{
+    flex-direction:column;
+    gap:25px;
+    background:#fff5f5;
+}
+
+#scene3 img{
+    max-width:80%;
+    max-height:70vh;
+    border-radius:20px;
+    opacity:0;
+    animation:appear 2s forwards;
+}
+
+@keyframes appear{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+.final-text{
+    font-size:3rem;
+    color:#5d3d3d;
+}
+</style>
+</head>
+<body>
+
+<section id="scene1" class="section">
+    <h1>Happy Birthday</h1>
+
+    <div class="cake">
+        <div class="cake-body"></div>
+        <div class="candle">
+            <div id="flame" class="flame"></div>
+        </div>
+    </div>
+
+    <p>Make a wish and blow out the candle</p>
+    <button id="micButton">🎤 Enable Microphone</button>
+</section>
+
+<section id="scene2" class="section hidden">
+
+<div class="card-container">
+
+<div class="birthday-card" id="birthdayCard">
+
+<div class="card-front">
+
+<h2>Happy Birthday 💌</h2>
+
+<p>Click to Open</p>
+
+</div>
+
+<div class="card-inside">
+
+<div class="photo-side">
+
+<img class="slide active"
+src="images/photo1.jpg">
+
+<img class="slide"
+src="images/photo2.jpg">
+
+<img class="slide"
+src="images/photo3.jpg">
+
+<img class="slide"
+src="images/photo4.jpg">
+
+<img class="slide"
+src="images/photo5.jpg">
+
+</div>
+
+<div class="message-side">
+
+<h2>Dear Rachael,</h2>
+
+<br>
+
+<p>
+Happy birthday, congrats on 19!! I know this isn’t anything crazy it’s not meant to be I just wanted to wish you a happy birthday in a slightly unique way. Strangely I don’t really know what to say even though I’ve known you for a bit now. As intense as we get, I have to say I really don’t know anyone else who’s enjoying living their life so much. Sometimes I feel like we’re in one big theatrical performance, and you’re one of the major actors. You really march to the beat of your own drum. Anyways, obviously you’ve been a very influential figure in my life in what I honestly think is a net positive. Yeah I was in jail but wow now I’m in California. Genuinely how the fuck did I do that. But seriously, if you weren’t with me at Brandeis I would’ve ended it truly. Cold ass place in the middle of nowhere surrounded by inbred weirdos. You’re really pretty obviously, but also, through it all, you’re a good person, a good friend. Or something. I don’t know. I like screaming with you. I like being loud with you. I like resting with you. I like being quiet with you. I like eating with you. I like watching with you. You’re a very fun person I never have a dull moment with you. Who else would force me up to build a snowman the first day it snows. Or spill a muffin all over my carpet. I find that I don’t know what to say. If I had to choose to save one person from the entire human race, it’d probably be you. But yeah, congrats on 19 again chud. See you
+</p>
+
+<br>
+
+<button id="continueBtn">
+Continue →
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="scene3" class="section hidden">
+    <img src="images/final-drawing.png">
+    <div class="final-text">Happy Birthday ❤️</div>
+</section>
+
+<script>
+const micButton = document.getElementById("micButton");
+
+micButton.addEventListener("click", async ()=>{
+
+const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+
+const ctx = new AudioContext();
+const source = ctx.createMediaStreamSource(stream);
+const analyser = ctx.createAnalyser();
+
+source.connect(analyser);
+
+const data = new Uint8Array(analyser.frequencyBinCount);
+
+function detect(){
+    analyser.getByteFrequencyData(data);
+
+    let volume = data.reduce((a,b)=>a+b,0)/data.length;
+
+    if(volume > 35){
+
+        document.getElementById("flame").style.display="none";
+
+        confetti({
+            particleCount:180,
+            spread:120,
+            origin:{x:0}
+        });
+
+        confetti({
+            particleCount:180,
+            spread:120,
+            origin:{x:1}
+        });
+
+        document.getElementById("scene1").classList.add("fadeout");
+
+        setTimeout(()=>{
+            document.getElementById("scene1").classList.add("hidden");
+            document.getElementById("scene2").classList.remove("hidden");
+        },1500);
+
+        return;
+    }
+
+    requestAnimationFrame(detect);
+}
+
+detect();
+
+});
+
+document
+.getElementById("birthdayCard")
+.addEventListener("click",()=>{
+
+document
+.getElementById("birthdayCard")
+.classList.add("open");
+
+});
+
+document.getElementById("continueBtn").addEventListener("click", ()=>{
+
+    document.getElementById("scene2").classList.add("fadeout");
+
+    setTimeout(()=>{
+        document.getElementById("scene2").classList.add("hidden");
+        document.getElementById("scene3").classList.remove("hidden");
+    },1000);
+});
+
+const slides = document.querySelectorAll(".slide");
+let current = 0;
+
+setInterval(()=>{
+    slides[current].classList.remove("active");
+    current = (current + 1) % slides.length;
+    slides[current].classList.add("active");
+},3000);
+</script>
+
+</body>
+</html>
