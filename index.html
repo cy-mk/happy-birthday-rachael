@@ -97,9 +97,32 @@ button{
 
 /* SCENE 2 */
 #scene2{
-    background:#fffaf7;
     gap:50px;
     padding:40px;
+    overflow:hidden;
+    position:relative;
+
+    background:
+    radial-gradient(
+        circle at 20% 20%,
+        #ffc6d0 0%,
+        transparent 40%
+    ),
+    radial-gradient(
+        circle at 80% 30%,
+        #ffd6a5 0%,
+        transparent 40%
+    ),
+    radial-gradient(
+        circle at 50% 80%,
+        #ffe4ec 0%,
+        transparent 40%
+    ),
+    #fffaf7;
+
+    background-size:150% 150%;
+
+    animation:aurora 15s ease infinite;
 }
 
 .card-container{
@@ -202,6 +225,31 @@ from{opacity:0;transform:translateY(20px)}
 to{opacity:1;transform:translateY(0)}
 }
 
+@keyframes aurora{
+
+    0%{
+        background-position:
+        0% 0%,
+        100% 0%,
+        50% 100%;
+    }
+
+    50%{
+        background-position:
+        30% 20%,
+        70% 40%,
+        40% 80%;
+    }
+
+    100%{
+        background-position:
+        0% 0%,
+        100% 0%,
+        50% 100%;
+    }
+
+}
+
 .final-text{
     font-size:3rem;
     color:#5d3d3d;
@@ -266,8 +314,7 @@ src="images/photo5.jpg">
 <br>
 
 <p>
-Happy birthday, congrats on 19!! I know this isn’t anything crazy it’s not meant to be I just wanted to wish you a happy birthday in a slightly unique way. Strangely I don’t really know what to say even though I’ve known you for a bit now. As intense as we get, I have to say I really don’t know anyone else who’s enjoying living their life so much. Sometimes I feel like we’re in one big theatrical performance, and you’re one of the major actors. You really march to the beat of your own drum. Anyways, obviously you’ve been a very influential figure in my life in what I honestly think is a net positive. Yeah I was in jail but wow now I’m in California. Genuinely how the fuck did I do that. But seriously, if you weren’t with me at Brandeis I would’ve ended it truly. Cold ass place in the middle of nowhere surrounded by inbred weirdos. You’re really pretty obviously, but also, through it all, you’re a good person, a good friend. Or something. I don’t know. I like screaming with you. I like being loud with you. I like resting with you. I like being quiet with you. I like eating with you. I like watching with you. You’re a very fun person I never have a dull moment with you. Who else would force me up to build a snowman the first day it snows. Or spill a muffin all over my carpet. I find that I don’t know what to say. If I had to choose to save one person from the entire human race, it’d probably be you. But yeah, congrats on 19 again chud. See you
-</p>
+Happy birthday, congrats on 19!! I know this isn’t anything crazy it’s not meant to be I just wanted to wish you a happy birthday in a slightly unique way. Strangely I don’t really know what to say even though I’ve known you for a bit now. As intense as we get, I have to say I really don’t know anyone else who’s enjoying living their life so much. Sometimes I feel like we’re in one big theatrical performance, and you’re one of the major actors. You really march to the beat of your own drum. Anyways, obviously you’ve been a very influential figure in my life in what I honestly think is a net positive. If you weren’t with me at Brandeis I would’ve ended it truly. Cold ass place in the middle of nowhere surrounded by inbred weirdos. I like screaming with you. I like being loud with you. I like resting with you. I like being quiet with you. I like eating with you. I like watching things with you. You’re a very fun person I never have a dull moment with you. Who else would force me up to build a snowman the first day it snows. Or spill a muffin all over my carpet. I wish we could go to the game room again so I could prove that Jo is the goat. Or accidentally find a drunk guy in the lounge and nurse him back to health. I love when we get high and fuck around the area. I wish we took shrooms and went for a walk. Hanging out with you in social situations is like we’re playing a game of catch by ourselves and everyone's just watching like idiots. If I am a creation of all the people I have ever loved, then over the past year, it would not have been absurd to call you god. Honestly if I had to choose to save one person from the entire human race, it’d probably be you. But yeah, congrats on 19 chud</p>
 
 <br>
 
@@ -287,7 +334,7 @@ Continue →
 
 <section id="scene3" class="section hidden">
     <img src="images/final-drawing.png">
-    <div class="final-text">Happy Birthday ❤️</div>
+    <div class="final-text">Happy Birthday from Ono ❤️</div>
 </section>
 
 <script>
